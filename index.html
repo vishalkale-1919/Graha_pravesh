@@ -40,108 +40,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playball&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* Custom parchment background pattern */
-        .bg-parchment-pattern {
-            background-color: #f4ede2;
-            background-image: 
-                radial-gradient(circle at 100% 150%, #f4ede2 24%, #ede2ce 25%, #ede2ce 28%, #f4ede2 29%, #f4ede2 36%, #ede2ce 36%, #ede2ce 40%, transparent 40%, transparent),
-                radial-gradient(circle at 0% 150%, #f4ede2 24%, #ede2ce 25%, #ede2ce 28%, #f4ede2 29%, #f4ede2 36%, #ede2ce 36%, #ede2ce 40%, transparent 40%, transparent),
-                radial-gradient(circle at 50% 100%, #ede2ce 10%, #f4ede2 11%, #f4ede2 23%, #ede2ce 24%, #ede2ce 30%, #f4ede2 31%, #f4ede2 43%, #ede2ce 44%, #ede2ce 50%, transparent 50%, transparent);
-            background-size: 100px 50px;
+        /* CSS background images with cover size and centered position */
+        .bg-section-1 {
+            background-image: url('g1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .bg-section-2 {
+            background-image: url('g2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .bg-section-3 {
+            background-image: url('g3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .parchment-glow {
-            box-shadow: inset 0 0 100px rgba(139, 30, 32, 0.05), 0 10px 30px rgba(0,0,0,0.05);
+        /* Parchment overlay cards to blend with the original background texture */
+        .parchment-overlay {
+            background-color: rgba(246, 240, 230, 0.94);
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1), inset 0 0 20px rgba(139, 30, 32, 0.05);
+            backdrop-blur: 4px;
         }
 
         /* Bell swing animation */
         @keyframes swing {
             0% { transform: rotate(0deg); }
-            20% { transform: rotate(8deg); }
-            40% { transform: rotate(-6deg); }
-            60% { transform: rotate(4deg); }
-            80% { transform: rotate(-3deg); }
+            20% { transform: rotate(6deg); }
+            40% { transform: rotate(-5deg); }
+            60% { transform: rotate(3deg); }
+            80% { transform: rotate(-2deg); }
             100% { transform: rotate(0deg); }
         }
         .animate-swing {
             transform-origin: top center;
             animation: swing 6s ease-in-out infinite;
         }
-        .animate-swing-delayed {
-            transform-origin: top center;
-            animation: swing 6s ease-in-out infinite;
-            animation-delay: 1.5s;
-        }
-        .animate-swing-slow {
-            transform-origin: top center;
-            animation: swing 8s ease-in-out infinite;
-            animation-delay: 0.7s;
-        }
-
-        /* Lotus floating animation */
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-            animation: float 4.5s ease-in-out infinite;
-            animation-delay: 2s;
-        }
-
-        /* Wind blowing leaves animation */
-        @keyframes wave {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(3deg) scale(1.02); }
-            100% { transform: rotate(0deg); }
-        }
-        .animate-wave {
-            transform-origin: bottom center;
-            animation: wave 7s ease-in-out infinite;
-        }
 
         /* Scroll Animation States */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.215, 0.61, 0.355, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.9) translateY(20px);
-            transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-        }
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
         }
 
         /* Language Toggle Button styling */
@@ -160,7 +109,6 @@
     <!-- Top Navigation / Language Bar -->
     <div class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 py-3 bg-parchment/90 backdrop-blur-md border-b border-heritage-gold/30 shadow-md">
         <div class="flex items-center gap-1.5">
-            <!-- Miniature Ganesha Logo -->
             <svg class="w-8 h-8 text-heritage-red fill-current" viewBox="0 0 100 100">
                 <path d="M50,10 C40,10 32,18 32,28 C32,32 34,36 37,39 C31,43 27,50 27,58 C27,65 31,71 37,74 C34,78 32,83 32,88 C32,89 33,90 34,90 C39,90 44,88 47,84 C48,84 49,84 50,84 C51,84 52,84 53,84 C56,88 61,90 66,90 C67,90 68,89 68,88 C68,83 66,78 63,74 C69,71 73,65 73,58 C73,50 69,43 63,39 C66,36 68,32 68,28 C68,18 60,10 50,10 Z M50,16 C57,16 62,21 62,28 C62,33 58,38 52,39 C51,39 50,39 50,39 C50,39 49,39 48,39 C42,38 38,33 38,28 C38,21 43,16 50,16 Z M42,45 C45,47 48,48 50,48 C52,48 55,47 58,45 C63,48 67,53 67,58 C67,65 61,70 50,70 C39,70 33,65 33,58 C33,53 37,48 42,45 Z"/>
             </svg>
@@ -174,498 +122,215 @@
         </div>
     </div>
 
-    <!-- Main Container -->
-    <main class="max-w-md md:max-w-xl mx-auto bg-parchment-pattern min-h-screen relative shadow-2xl border-x-4 border-heritage-gold/40 pb-20 pt-16">
+    <!-- Main Mobile Frame Container -->
+    <main class="max-w-md md:max-w-lg mx-auto min-h-screen relative shadow-2xl border-x-4 border-heritage-gold/40 pb-20 pt-16">
         
-        <!-- ================= SECTION 1: HEADER / INTRO ================= -->
-        <section id="section-intro" class="min-h-screen flex flex-col justify-between items-center relative py-12 px-6 overflow-hidden">
-            
-            <!-- Corner Ornamental Borders -->
-            <div class="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-heritage-gold opacity-60"></div>
-            <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-heritage-gold opacity-60"></div>
-            
-            <!-- Arch & Hanging Bells -->
-            <div class="w-full flex flex-col items-center mt-4">
-                <!-- Arch Graphic (SVG) -->
-                <div class="w-full max-w-[280px] sm:max-w-[340px] text-heritage-gold drop-shadow-md">
-                    <svg viewBox="0 0 300 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-                        <path d="M10 110 C80 20, 220 20, 290 110" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <path d="M20 110 C85 30, 215 30, 280 110" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" fill="none"/>
-                        <path d="M150 15 C145 25, 155 25, 150 15 Z" fill="currentColor"/>
-                        <path d="M150 15 C140 22, 142 28, 150 28 C158 28, 160 22, 150 15 Z" fill="#e05380"/>
-                        <circle cx="10" cy="110" r="5" fill="currentColor"/>
-                        <circle cx="290" cy="110" r="5" fill="currentColor"/>
-                    </svg>
-                </div>
-                
-                <!-- Hanging Bells Grid (SVG) -->
-                <div class="flex justify-center gap-6 sm:gap-10 -mt-16 sm:-mt-20 z-10 w-full px-12">
-                    <div class="animate-swing flex flex-col items-center">
-                        <div class="w-[2px] h-12 sm:h-16 bg-heritage-gold"></div>
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-heritage-gold fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2C10.3 2 9 3.3 9 5V6.3C6.7 7.1 5 9.3 5 12V17L3 19V20H21V19L19 17V12C19 9.3 17.3 7.1 15 6.3V5C15 3.3 13.7 2 12 2ZM12 4C12.6 4 13 4.4 13 5V6.1C12.7 6 12.3 6 12 6C11.7 6 11.3 6 11 6.1V5C11 4.4 11.4 4 12 4ZM7 12C7 9.2 9.2 7 12 7C14.8 7 17 9.2 17 12V18H7V12ZM10 21C10 22.1 10.9 23 12 23C13.1 23 14 22.1 14 21H10Z"/>
-                        </svg>
-                    </div>
-                    <div class="animate-swing-slow flex flex-col items-center">
-                        <div class="w-[2px] h-16 sm:h-20 bg-heritage-gold"></div>
-                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-heritage-gold fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2C10.3 2 9 3.3 9 5V6.3C6.7 7.1 5 9.3 5 12V17L3 19V20H21V19L19 17V12C19 9.3 17.3 7.1 15 6.3V5C15 3.3 13.7 2 12 2ZM12 4C12.6 4 13 4.4 13 5V6.1C12.7 6 12.3 6 12 6C11.7 6 11.3 6 11 6.1V5C11 4.4 11.4 4 12 4ZM7 12C7 9.2 9.2 7 12 7C14.8 7 17 9.2 17 12V18H7V12ZM10 21C10 22.1 10.9 23 12 23C13.1 23 14 22.1 14 21H10Z"/>
-                        </svg>
-                    </div>
-                    <div class="animate-swing-delayed flex flex-col items-center">
-                        <div class="w-[2px] h-12 sm:h-16 bg-heritage-gold"></div>
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-heritage-gold fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2C10.3 2 9 3.3 9 5V6.3C6.7 7.1 5 9.3 5 12V17L3 19V20H21V19L19 17V12C19 9.3 17.3 7.1 15 6.3V5C15 3.3 13.7 2 12 2ZM12 4C12.6 4 13 4.4 13 5V6.1C12.7 6 12.3 6 12 6C11.7 6 11.3 6 11 6.1V5C11 4.4 11.4 4 12 4ZM7 12C7 9.2 9.2 7 12 7C14.8 7 17 9.2 17 12V18H7V12ZM10 21C10 22.1 10.9 23 12 23C13.1 23 14 22.1 14 21H10Z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+        <!-- ================= SECTION 1: HEADER / INTRO (g1 background) ================= -->
+        <section id="section-intro" class="min-h-screen bg-section-1 flex flex-col justify-between items-center relative py-12 px-6 overflow-hidden">
+            <!-- Overlay wrapper to tint background slightly for readability if needed, keeping it light -->
+            <div class="absolute inset-0 bg-white/5 pointer-events-none"></div>
 
-            <!-- Ganesha Motif & Welcoming Text -->
-            <div class="flex-1 flex flex-col justify-center items-center py-6 z-10 w-full">
-                <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-heritage-gold p-3 flex items-center justify-center bg-white/60 backdrop-blur-sm shadow-lg mb-6 reveal-scale">
-                    <svg viewBox="0 0 100 100" class="w-full h-full text-heritage-red fill-current">
-                        <path d="M50 10C53 10 56 12 56 15C56 18 53 20 50 20C47 20 44 18 44 15C44 12 47 10 50 10Z"/>
-                        <path d="M50 22C54 22 59 23 61 27C63 31 63 36 60 40C57 44 54 46 51 49C48 52 46 56 46 61C46 62 45 63 44 63C43 63 42 62 42 61C42 54 45 49 48 45C51 42 55 40 57 37C59 34 59 31 58 29C57 27 54 26 50 26C45 26 42 28 39 31C36 34 35 39 36 44C36 45 35 46 34 46C33 46 32 45 32 44C31 37 33 31 37 27C41 23 45 22 50 22Z"/>
-                        <path d="M42 35C45 35 47 37 47 40C47 43 45 45 42 45C39 45 37 43 37 40C37 37 39 35 42 35Z" fill="#e05380"/>
-                        <path d="M50 42C53 42 55 45 55 48C55 54 50 58 45 58C44 58 43 57 43 56C43 55 44 54 45 54C48 54 51 51 51 48C51 46 50 45 48 45C47 45 46 46 45 47C44 48 43 48 42 47C41 46 41 45 42 44C44 42 47 42 50 42Z"/>
-                        <path d="M47 49C49 53 53 55 58 55C63 55 67 52 69 48C70 47 71 47 72 48C73 49 73 50 72 51C69 56 64 60 58 60C52 60 47 57 44 52C43 51 44 49 45 49C46 48 47 48 47 49Z"/>
-                        <path d="M48 18H52V21H48V18Z" fill="#d4af37"/>
-                        <circle cx="50" cy="14" r="2" fill="#d4af37"/>
-                    </svg>
-                </div>
-                
-                <p class="text-heritage-red font-serif font-semibold text-center text-lg sm:text-xl tracking-widest px-4 mb-4 reveal">
-                    || Shree Ganeshaya Namah ||<br>
-                    <span class="text-sm font-sans font-medium text-stone-600 block mt-1">|| ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ ||</span>
-                </p>
-                
-                <div class="text-center mt-6 px-4 reveal">
-                    <span class="text-heritage-gold font-script text-3xl sm:text-4xl block mb-2">Welcome to our Celebration</span>
-                    <h1 class="text-stone-800 font-serif text-2xl sm:text-3xl font-bold tracking-wide uppercase leading-snug">
+            <!-- Welcoming Content Overlay (covers original empty center of g1) -->
+            <div class="flex-1 flex flex-col justify-center items-center py-6 z-10 w-full mt-24">
+                <!-- Text Container with custom styling -->
+                <div class="text-center bg-[#fcf8f2]/90 border border-heritage-gold/40 p-5 rounded-2xl shadow-lg max-w-[280px] sm:max-w-[320px] reveal active">
+                    <span class="text-heritage-gold font-script text-2xl sm:text-3xl block mb-1">Welcome to our Celebration</span>
+                    <h1 class="text-heritage-red font-serif text-xl sm:text-2xl font-bold tracking-wide uppercase leading-snug">
                         Housewarming Ceremony
                     </h1>
-                    <div class="w-16 h-[2px] bg-heritage-gold mx-auto my-4"></div>
-                    <p class="text-stone-600 font-sans text-xs tracking-widest uppercase">
-                        Invitation to inaugurate our sweet home
-                    </p>
-                </div>
-            </div>
-
-            <!-- Two Decorated Elephants & Lotus Flowers at the Bottom -->
-            <div class="w-full relative h-48 mt-auto flex items-end justify-between px-2">
-                <div class="w-28 sm:w-36 h-auto text-heritage-gold z-10 reveal-left">
-                    <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow-md">
-                        <path d="M10 80 C15 70, 20 60, 30 55 C35 52, 45 52, 50 58 C55 65, 60 70, 70 70 C80 70, 85 60, 88 50 C90 40, 85 30, 80 25 C75 22, 65 25, 60 30 C58 32, 55 35, 52 35 C50 35, 48 30, 50 25 C52 20, 58 15, 65 12 C75 8, 90 10, 100 20 C108 28, 110 40, 105 52 C100 65, 88 80, 75 85 C65 88, 55 88, 45 85 C35 82, 20 82, 10 80 Z" fill="currentColor"/>
-                        <circle cx="75" cy="35" r="2" fill="#8b1e20"/>
-                        <path d="M85 30 C90 30, 95 35, 92 45 C90 50, 85 52, 82 45 C80 40, 80 30, 85 30 Z" fill="#8b1e20"/>
-                        <rect x="40" y="80" width="12" height="15" rx="3" fill="currentColor"/>
-                        <rect x="65" y="80" width="12" height="15" rx="3" fill="currentColor"/>
-                        <path d="M55 45 C65 42, 75 42, 85 45 L80 65 C72 68, 68 68, 60 65 Z" fill="#8b1e20"/>
-                        <rect x="62" y="48" width="15" height="12" fill="#d4af37" rx="1"/>
-                    </svg>
-                </div>
-
-                <!-- Center Floating Lotus Garland & Flowers -->
-                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-48 flex justify-center items-end gap-1 z-20">
-                    <div class="animate-float text-heritage-pink w-10 h-10">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-                            <path d="M12 21C12 21 7 17 5 14C3 11 4.5 7 7.5 7C9.5 7 11 8.5 12 10C13 8.5 14.5 7 16.5 7C19.5 7 21 11 19 14C17 17 12 21 12 21Z"/>
-                        </svg>
+                    <div class="w-12 h-[2px] bg-heritage-gold mx-auto my-3"></div>
+                    
+                    <div class="lang-en">
+                        <p class="text-stone-700 font-serif text-sm italic font-semibold">
+                            "Shree Amoghasiddheshwara Nilaya"
+                        </p>
+                        <p class="text-[10px] text-stone-500 font-sans tracking-widest uppercase mt-2">
+                            August 26, 2026 | Kushtagi
+                        </p>
                     </div>
-                    <div class="animate-float-delayed text-heritage-pink w-14 h-14 pb-1">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-                            <path d="M12 21C12 21 7 17 5 14C3 11 4.5 7 7.5 7C9.5 7 11 8.5 12 10C13 8.5 14.5 7 16.5 7C19.5 7 21 11 19 14C17 17 12 21 12 21Z"/>
-                        </svg>
+                    <div class="lang-kn hidden">
+                        <p class="text-stone-700 font-serif text-sm font-semibold">
+                            "ಶ್ರೀ ಅಮೋಘಸಿದ್ದೇಶ್ವರ ನಿಲಯ"
+                        </p>
+                        <p class="text-[10px] text-stone-500 font-sans tracking-widest uppercase mt-2">
+                            ಆಗಸ್ಟ್ ೨೬, ೨೦೨೬ | ಕುಷ್ಟಗಿ
+                        </p>
                     </div>
-                    <div class="animate-float text-heritage-pink w-10 h-10">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-                            <path d="M12 21C12 21 7 17 5 14C3 11 4.5 7 7.5 7C9.5 7 11 8.5 12 10C13 8.5 14.5 7 16.5 7C19.5 7 21 11 19 14C17 17 12 21 12 21Z"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="w-28 sm:w-36 h-auto text-heritage-gold z-10 scale-x-[-1] reveal-right">
-                    <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full drop-shadow-md">
-                        <path d="M10 80 C15 70, 20 60, 30 55 C35 52, 45 52, 50 58 C55 65, 60 70, 70 70 C80 70, 85 60, 88 50 C90 40, 85 30, 80 25 C75 22, 65 25, 60 30 C58 32, 55 35, 52 35 C50 35, 48 30, 50 25 C52 20, 58 15, 65 12 C75 8, 90 10, 100 20 C108 28, 110 40, 105 52 C100 65, 88 80, 75 85 C65 88, 55 88, 45 85 C35 82, 20 82, 10 80 Z" fill="currentColor"/>
-                        <circle cx="75" cy="35" r="2" fill="#8b1e20"/>
-                        <path d="M85 30 C90 30, 95 35, 92 45 C90 50, 85 52, 82 45 C80 40, 80 30, 85 30 Z" fill="#8b1e20"/>
-                        <rect x="40" y="80" width="12" height="15" rx="3" fill="currentColor"/>
-                        <rect x="65" y="80" width="12" height="15" rx="3" fill="currentColor"/>
-                        <path d="M55 45 C65 42, 75 42, 85 45 L80 65 C72 68, 68 68, 60 65 Z" fill="#8b1e20"/>
-                        <rect x="62" y="48" width="15" height="12" fill="#d4af37" rx="1"/>
-                    </svg>
                 </div>
             </div>
 
             <!-- Scroll Indicator -->
-            <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 opacity-70">
+            <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 opacity-80 z-20">
                 <span class="text-[10px] tracking-widest uppercase font-semibold text-heritage-red">Scroll Down</span>
                 <div class="w-1.5 h-6 bg-heritage-gold/60 rounded-full flex justify-center items-start p-[2px]">
                     <div class="w-1 h-2 bg-heritage-red rounded-full animate-bounce"></div>
                 </div>
             </div>
-
         </section>
 
-        <!-- ================= SECTION 2: INVITATION MAIN ================= -->
-        <section id="section-invite" class="min-h-screen flex flex-col justify-center items-center relative py-16 px-6 overflow-hidden border-t border-heritage-gold/20">
+        <!-- ================= SECTION 2: INVITATION MAIN (g2 background) ================= -->
+        <section id="section-invite" class="min-h-screen bg-section-2 flex flex-col justify-center items-center relative py-16 px-6 overflow-hidden border-t border-heritage-gold/20">
             
-            <!-- Hanging Lotus Garlands Border Left/Right -->
-            <div class="absolute left-2 top-0 bottom-0 w-4 flex flex-col justify-around items-center opacity-40">
-                <div class="text-heritage-pink animate-float">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float-delayed">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float-delayed">✿</div>
-            </div>
-            <div class="absolute right-2 top-0 bottom-0 w-4 flex flex-col justify-around items-center opacity-40">
-                <div class="text-heritage-pink animate-float-delayed">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float-delayed">✿</div>
-                <div class="text-heritage-gold">◆</div>
-                <div class="text-heritage-pink animate-float">✿</div>
-            </div>
-
-            <div class="absolute top-0 left-0 w-28 h-28 text-heritage-green/20 animate-wave pointer-events-none">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M0 0 C40 20, 80 40, 100 80 C80 70, 50 50, 0 30 Z"/>
-                    <path d="M0 10 C30 25, 60 45, 80 80 C60 65, 30 45, 0 25 Z"/>
-                    <path d="M0 20 C20 30, 40 50, 60 80 C40 60, 20 40, 0 20 Z"/>
-                </svg>
-            </div>
-            <div class="absolute top-0 right-0 w-28 h-28 text-heritage-green/20 scale-x-[-1] animate-wave pointer-events-none">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M0 0 C40 20, 80 40, 100 80 C80 70, 50 50, 0 30 Z"/>
-                    <path d="M0 10 C30 25, 60 45, 80 80 C60 65, 30 45, 0 25 Z"/>
-                    <path d="M0 20 C20 30, 40 50, 60 80 C40 60, 20 40, 0 20 Z"/>
-                </svg>
-            </div>
-
-            <div class="w-full max-w-lg z-10 flex flex-col justify-between h-full py-2">
+            <!-- Beautiful Parchment Card Overlay covering the original invitation text of g2 -->
+            <div class="w-full max-w-sm z-10 parchment-overlay rounded-2xl p-6 text-center my-auto reveal">
                 
-                <div class="text-center mb-8 reveal">
+                <!-- Blessings -->
+                <div class="mb-4">
                     <div class="lang-en">
-                        <p class="text-stone-600 font-sans text-xs uppercase tracking-widest mb-1">With the Blessings of</p>
-                        <p class="text-heritage-red font-serif font-semibold text-lg">Family Deity & Gurus</p>
-                        <div class="flex justify-center items-center gap-1.5 mt-2">
-                            <span class="text-heritage-gold text-[10px]">◆</span>
-                            <p class="text-stone-500 font-sans text-xs italic">Shree Kuladevata & Guru-Hiriya</p>
-                            <span class="text-heritage-gold text-[10px]">◆</span>
-                        </div>
+                        <p class="text-stone-500 font-sans text-[10px] uppercase tracking-widest mb-1">With the Blessings of</p>
+                        <p class="text-heritage-red font-serif font-bold text-base leading-tight">Family Deity & Gurus</p>
+                        <p class="text-[10px] text-stone-500 font-sans italic mt-1">(Shree Kuladevata & Guru-Hiriya)</p>
                     </div>
                     <div class="lang-kn hidden">
-                        <p class="text-stone-600 font-sans text-xs uppercase tracking-widest mb-1">ಆಶೀರ್ವಾದದೊಂದಿಗೆ</p>
-                        <p class="text-heritage-red font-serif font-semibold text-lg">ಶ್ರೀ ಕುಲದೇವತಾ ಹಾಗೂ ಶ್ರೀ ಗುರು ಹಿರಿಯರ</p>
-                        <div class="flex justify-center items-center gap-1.5 mt-2">
-                            <span class="text-heritage-gold text-[10px]">◆</span>
-                            <p class="text-stone-500 font-sans text-xs">ಕೃಪಾಶೀರ್ವಾದದಿಂದ</p>
-                            <span class="text-heritage-gold text-[10px]">◆</span>
-                        </div>
+                        <p class="text-stone-500 font-sans text-[10px] uppercase tracking-widest mb-1">ಆಶೀರ್ವಾದದೊಂದಿಗೆ</p>
+                        <p class="text-heritage-red font-serif font-bold text-base leading-tight">ಶ್ರೀ ಕುಲದೇವತಾ ಹಾಗೂ ಶ್ರೀ ಗುರು ಹಿರಿಯರ</p>
+                        <p class="text-[10px] text-stone-500 font-sans mt-1">ಕೃಪಾಶೀರ್ವಾದದಿಂದ</p>
                     </div>
                 </div>
 
-                <div class="text-center my-6 reveal">
+                <div class="w-16 h-[1px] bg-heritage-gold mx-auto my-3"></div>
+
+                <!-- Main Invitation Message -->
+                <div class="my-4">
                     <div class="lang-en">
-                        <p class="text-stone-700 font-serif leading-relaxed text-sm max-w-sm mx-auto mb-6 px-4">
+                        <p class="text-stone-700 font-serif leading-relaxed text-xs sm:text-sm px-2">
                             We request the pleasure of your presence to celebrate the auspicious housewarming ceremony of our newly constructed home:
                         </p>
                         
-                        <div class="my-6 relative py-4 px-6 border-2 border-heritage-red bg-heritage-red/5 rounded-xl max-w-xs mx-auto shadow-inner">
-                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-parchment px-3 py-0.5 text-xs text-heritage-gold font-semibold tracking-wider border border-heritage-gold rounded-full">
-                                HOUSE NAME
-                            </div>
-                            <h2 class="text-heritage-red font-serif text-xl sm:text-2xl font-bold tracking-wide mt-2">
+                        <div class="my-4 py-3 px-4 border border-heritage-red bg-heritage-red/5 rounded-xl">
+                            <span class="text-[9px] text-heritage-gold font-bold tracking-widest uppercase block mb-1">NEW HOME</span>
+                            <h2 class="text-heritage-red font-serif text-lg sm:text-xl font-bold tracking-wide">
                                 "Shree Amoghasiddheshwara Nilaya"
                             </h2>
                         </div>
                         
-                        <p class="text-stone-600 font-sans text-xs uppercase tracking-widest mt-6">
-                            Join us in seeking divine blessings
+                        <p class="text-stone-600 font-sans text-[10px] uppercase tracking-widest mt-4">
+                            Kindly join us with family & friends
                         </p>
                     </div>
                     
                     <div class="lang-kn hidden">
-                        <p class="text-stone-700 font-serif leading-relaxed text-sm max-w-sm mx-auto mb-6 px-4">
+                        <p class="text-stone-700 font-serif leading-relaxed text-xs sm:text-sm px-2">
                             ನಮ್ಮ ಪ್ರೀತಿಯ ಬಂಧುಗಳೇ ಹಾಗೂ ಹಿತೈಷಿಗಳೇ, ನಮ್ಮ ನೂತನವಾಗಿ ನಿರ್ಮಿಸಿರುವ ಗೃಹ ಪ್ರವೇಶದ ಶುಭ ಸಮಾರಂಭಕ್ಕೆ ನಿಮ್ಮ ಸಕುಟುಂಬ ಪರಿವಾರ ಸಮೇತ ಆಗಮಿಸಿ ಶುಭ ಹಾರೈಸಬೇಕೆಂದು ವಿನಂತಿ.
                         </p>
                         
-                        <div class="my-6 relative py-4 px-6 border-2 border-heritage-red bg-heritage-red/5 rounded-xl max-w-xs mx-auto shadow-inner">
-                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-parchment px-3 py-0.5 text-xs text-heritage-gold font-semibold tracking-wider border border-heritage-gold rounded-full">
-                                ಮನೆಯ ಹೆಸರು
-                            </div>
-                            <h2 class="text-heritage-red font-serif text-xl sm:text-2xl font-bold tracking-wide mt-2">
+                        <div class="my-4 py-3 px-4 border border-heritage-red bg-heritage-red/5 rounded-xl">
+                            <span class="text-[9px] text-heritage-gold font-bold tracking-widest uppercase block mb-1">ಮನೆಯ ಹೆಸರು</span>
+                            <h2 class="text-heritage-red font-serif text-lg sm:text-xl font-bold tracking-wide">
                                 "ಶ್ರೀ ಅಮೋಘಸಿದ್ದೇಶ್ವರ ನಿಲಯ"
                             </h2>
                         </div>
                         
-                        <p class="text-stone-600 font-sans text-xs uppercase tracking-widest mt-6">
+                        <p class="text-stone-600 font-sans text-[10px] uppercase tracking-widest mt-4">
                             ನಿಮ್ಮ ಆಗಮನವೇ ನಮಗೆ ಸೌಭಾಗ್ಯ
                         </p>
-                    </div>
-                </div>
-
-                <!-- Balcony with Sacred Cows motif -->
-                <div class="w-full relative mt-8 flex flex-col items-center">
-                    <div class="w-full border-t-2 border-heritage-gold/50 py-2 flex justify-around px-8 bg-white/20 backdrop-blur-xs rounded-t-lg">
-                        <div class="w-24 sm:w-28 text-stone-700 reveal-left">
-                            <svg viewBox="0 0 100 80" fill="currentColor" class="w-full">
-                                <path d="M10 50 C12 40, 20 35, 30 35 C40 35, 45 40, 50 35 C55 30, 60 20, 65 25 C70 30, 75 32, 80 25 C83 20, 85 10, 88 12 C90 15, 87 25, 85 30 C88 32, 92 35, 95 32 C97 30, 99 25, 100 28 C99 35, 95 40, 90 42 C85 45, 82 55, 80 65 C78 70, 70 72, 60 70 C50 68, 30 68, 20 65 Z" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="30" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="42" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="68" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="78" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <path d="M78 20 C76 12, 72 8, 70 12 C69 15, 74 18, 78 20 Z" fill="#8b1e20"/>
-                                <path d="M82 20 C84 12, 88 8, 90 12 C91 15, 86 18, 82 20 Z" fill="#8b1e20"/>
-                                <circle cx="45" cy="48" r="2.5" fill="#8b1e20"/>
-                                <circle cx="55" cy="52" r="2.5" fill="#8b1e20"/>
-                                <circle cx="65" cy="48" r="2.5" fill="#8b1e20"/>
-                                <circle cx="35" cy="52" r="2.5" fill="#8b1e20"/>
-                            </svg>
-                        </div>
-                        
-                        <div class="w-24 sm:w-28 text-stone-700 scale-x-[-1] reveal-right">
-                            <svg viewBox="0 0 100 80" fill="currentColor" class="w-full">
-                                <path d="M10 50 C12 40, 20 35, 30 35 C40 35, 45 40, 50 35 C55 30, 60 20, 65 25 C70 30, 75 32, 80 25 C83 20, 85 10, 88 12 C90 15, 87 25, 85 30 C88 32, 92 35, 95 32 C97 30, 99 25, 100 28 C99 35, 95 40, 90 42 C85 45, 82 55, 80 65 C78 70, 70 72, 60 70 C50 68, 30 68, 20 65 Z" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="30" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="42" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="68" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <rect x="78" y="65" width="6" height="15" fill="#f4ede2" stroke="#8b1e20" stroke-width="1.5"/>
-                                <path d="M78 20 C76 12, 72 8, 70 12 C69 15, 74 18, 78 20 Z" fill="#8b1e20"/>
-                                <path d="M82 20 C84 12, 88 8, 90 12 C91 15, 86 18, 82 20 Z" fill="#8b1e20"/>
-                                <circle cx="45" cy="48" r="2.5" fill="#8b1e20"/>
-                                <circle cx="55" cy="52" r="2.5" fill="#8b1e20"/>
-                                <circle cx="65" cy="48" r="2.5" fill="#8b1e20"/>
-                                <circle cx="35" cy="52" r="2.5" fill="#8b1e20"/>
-                            </svg>
-                        </div>
                     </div>
                 </div>
             </div>
 
         </section>
 
-        <!-- ================= SECTION 3: EVENT DETAILS ================= -->
-        <section id="section-details" class="min-h-screen flex flex-col justify-between items-center relative py-16 px-6 overflow-hidden border-t border-heritage-gold/20">
+        <!-- ================= SECTION 3: EVENT DETAILS (g3 background) ================= -->
+        <section id="section-details" class="min-h-screen bg-section-3 flex flex-col justify-center items-center relative py-16 px-6 overflow-hidden border-t border-heritage-gold/20">
             
-            <!-- Royal Dome Motifs at corners -->
-            <div class="absolute bottom-0 left-0 w-32 h-32 text-heritage-gold/15 pointer-events-none">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M50 0 C40 20, 20 30, 20 50 C20 70, 80 70, 80 50 C80 30, 60 20, 50 0 Z"/>
-                    <rect x="47" y="0" width="6" height="15"/>
-                    <line x1="10" y1="75" x2="90" y2="75" stroke="currentColor" stroke-width="3"/>
-                    <line x1="10" y1="85" x2="90" y2="85" stroke="currentColor" stroke-width="3"/>
-                    <rect x="20" y="75" width="5" height="10"/>
-                    <rect x="40" y="75" width="5" height="10"/>
-                    <rect x="60" y="75" width="5" height="10"/>
-                    <rect x="80" y="75" width="5" height="10"/>
-                </svg>
-            </div>
-            
-            <div class="absolute bottom-0 right-0 w-32 h-32 text-heritage-gold/15 scale-x-[-1] pointer-events-none">
-                <svg viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M50 0 C40 20, 20 30, 20 50 C20 70, 80 70, 80 50 C80 30, 60 20, 50 0 Z"/>
-                    <rect x="47" y="0" width="6" height="15"/>
-                    <line x1="10" y1="75" x2="90" y2="75" stroke="currentColor" stroke-width="3"/>
-                    <line x1="10" y1="85" x2="90" y2="85" stroke="currentColor" stroke-width="3"/>
-                    <rect x="20" y="75" width="5" height="10"/>
-                    <rect x="40" y="75" width="5" height="10"/>
-                    <rect x="60" y="75" width="5" height="10"/>
-                    <rect x="80" y="75" width="5" height="10"/>
-                </svg>
-            </div>
-
-            <!-- Hanging lotus buds/garlands -->
-            <div class="w-full flex justify-center gap-8 -mt-8 opacity-60">
-                <div class="animate-swing flex flex-col items-center">
-                    <div class="w-[1px] h-10 bg-heritage-gold"></div>
-                    <div class="w-3 h-5 bg-heritage-pink rounded-b-full"></div>
-                </div>
-                <div class="animate-swing-slow flex flex-col items-center">
-                    <div class="w-[1px] h-14 bg-heritage-gold"></div>
-                    <div class="w-3 h-5 bg-heritage-pink rounded-b-full"></div>
-                </div>
-                <div class="animate-swing-delayed flex flex-col items-center">
-                    <div class="w-[1px] h-10 bg-heritage-gold"></div>
-                    <div class="w-3 h-5 bg-heritage-pink rounded-b-full"></div>
-                </div>
-            </div>
-
-            <!-- Content Card -->
-            <div class="w-full max-w-md z-10 my-auto py-6">
+            <!-- Parchment Overlay Card covering the original date/address of g3 in the center -->
+            <div class="w-full max-w-sm z-10 parchment-overlay rounded-2xl p-6 text-center my-auto reveal">
                 
-                <div class="text-center mb-6 reveal">
+                <div class="mb-4">
                     <div class="lang-en">
-                        <span class="text-heritage-gold font-script text-2xl">Please Join Us For The</span>
-                        <h3 class="text-heritage-red font-serif text-xl font-bold uppercase tracking-wider mt-1">Auspicious Programs</h3>
+                        <span class="text-heritage-gold font-script text-xl">Please Join Us For The</span>
+                        <h3 class="text-heritage-red font-serif text-base font-bold uppercase tracking-wider mt-1">Auspicious Programs</h3>
                     </div>
                     <div class="lang-kn hidden">
-                        <span class="text-heritage-gold font-script text-2xl">ನಿಮ್ಮ ಉಪಸ್ಥಿತಿಯನ್ನು ಕೋರುವ</span>
-                        <h3 class="text-heritage-red font-serif text-xl font-bold uppercase tracking-wider mt-1">ಶುಭ ಕಾರ್ಯಕ್ರಮಗಳು</h3>
+                        <span class="text-heritage-gold font-script text-xl">ನಿಮ್ಮ ಉಪಸ್ಥಿತಿಯನ್ನು ಕೋರುವ</span>
+                        <h3 class="text-heritage-red font-serif text-base font-bold uppercase tracking-wider mt-1">ಶುಭ ಕಾರ್ಯಕ್ರಮಗಳು</h3>
                     </div>
-                    <div class="w-12 h-[1px] bg-heritage-gold mx-auto mt-2"></div>
+                    <div class="w-12 h-[1px] bg-heritage-gold mx-auto mt-1.5"></div>
                 </div>
 
-                <!-- Date and Muhurtha Details -->
-                <div class="bg-white/40 backdrop-blur-xs border border-heritage-gold/30 rounded-2xl p-6 shadow-md mb-8 reveal">
-                    
-                    <div class="text-center pb-4 border-b border-heritage-gold/20">
+                <!-- Date -->
+                <div class="pb-3 border-b border-heritage-gold/20 mb-3 text-xs">
+                    <div class="lang-en">
+                        <p class="text-stone-800 font-serif font-bold">Wednesday | 26th August 2026</p>
+                        <p class="text-stone-500 text-[10px] italic">(Shalivahana Shaka 1948, Shravana Masa)</p>
+                    </div>
+                    <div class="lang-kn hidden">
+                        <p class="text-stone-800 font-serif font-bold">ಬುಧವಾರ | ೨೬-೦೮-೨೦೨೬</p>
+                        <p class="text-stone-500 text-[10px]">(ಶಾಲಿವಾಹನ ಶಕೆ ೧೯೪೮, ಶ್ರಾವಣಮಾಸ)</p>
+                    </div>
+                </div>
+
+                <!-- Timings -->
+                <div class="text-left space-y-2 mb-4 text-xs">
+                    <div>
                         <div class="lang-en">
-                            <p class="text-stone-500 font-sans text-[10px] tracking-widest uppercase">Date of Function</p>
-                            <p class="text-stone-800 font-serif text-lg font-bold mt-1">Wednesday | 26th August 2026</p>
-                            <p class="text-stone-500 font-sans text-xs italic mt-0.5">(Shalivahana Shaka 1948, Shravana Masa)</p>
+                            <span class="font-bold text-heritage-red">✦ Gruha Pravesha Muhurtha:</span>
+                            <span class="text-stone-700">05:44 AM to 07:30 AM (Wednesday Morning)</span>
+                            <p class="text-[10px] text-stone-500 italic ml-4">Ganga Pooja, Vastu Shanti & Navagraha Pooja</p>
                         </div>
                         <div class="lang-kn hidden">
-                            <p class="text-stone-500 font-sans text-[10px] tracking-widest uppercase">ಕಾರ್ಯಕ್ರಮದ ದಿನಾಂಕ</p>
-                            <p class="text-stone-800 font-serif text-lg font-bold mt-1">ಬುಧವಾರ | ೨೬-೦೮-೨೦೨೬</p>
-                            <p class="text-stone-500 font-sans text-xs mt-0.5">(ಶ್ರೀ ಮನ್ಮಥ ಶಾಲಿವಾಹನ ಶಕೆ ೧೯೪೮ನೇ ಪರಭಾವನಾಮ ಸಂವತ್ಸರ ದಕ್ಷಿಣಾಯಣ ಶ್ರಾವಣಮಾಸ ಶುಕ್ಲ ಪಕ್ಷ ತ್ರಯೋದಶಿ)</p>
+                            <span class="font-bold text-heritage-red">✦ ಗೃಹ ಪ್ರವೇಶ ಮುಹೂರ್ತ:</span>
+                            <span class="text-stone-700">ಬೆಳಿಗ್ಗೆ ೦೫:೪೪ ರಿಂದ ೦೭:೩೦ ರ ಶುಭ ಸಮಯದಲ್ಲಿ</span>
+                            <p class="text-[10px] text-stone-500 ml-4">ಗಂಗಾಪೂಜೆ, ವಾಸ್ತು ಶಾಂತಿ ಮತ್ತು ನವಗ್ರಹ ಪೂಜೆಗಳು</p>
                         </div>
                     </div>
-
-                    <div class="pt-4 space-y-4">
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 text-heritage-red">✦</div>
-                            <div>
-                                <div class="lang-en">
-                                    <h4 class="font-serif font-bold text-stone-800 text-sm">Shubh Muhurtha (Gruha Pravesha)</h4>
-                                    <p class="text-xs text-stone-600">05:44 AM to 07:30 AM (Morning)</p>
-                                    <p class="text-[10px] text-stone-500 italic">Rituals: Ganga Pooja, Vastu Shanti & Navagraha Pooja</p>
-                                </div>
-                                <div class="lang-kn hidden">
-                                    <h4 class="font-serif font-bold text-stone-800 text-sm">ಶುಭ ಮುಹೂರ್ತ (ಗೃಹ ಪ್ರವೇಶ)</h4>
-                                    <p class="text-xs text-stone-600">ಬೆಳಿಗ್ಗೆ ೦೫:೪೪ ರಿಂದ ೦೭:೩೦ ರ ಶುಭ ಮುಹೂರ್ತದಲ್ಲಿ</p>
-                                    <p class="text-[10px] text-stone-500">ಗಂಗಾಪೂಜೆ, ವಾಸ್ತು ಶಾಂತಿ ಹಾಗೂ ನವಗ್ರಹ ಪೂಜೆಗಳು ಜರುಗಲಿವೆ</p>
-                                </div>
-                            </div>
+                    <div class="border-t border-heritage-gold/10 pt-2">
+                        <div class="lang-en">
+                            <span class="font-bold text-heritage-red">✦ Pritiya Bhojana (Lunch):</span>
+                            <span class="text-stone-700">01:30 PM Onwards</span>
                         </div>
-
-                        <div class="flex items-start gap-3 border-t border-heritage-gold/10 pt-4">
-                            <div class="mt-1 text-heritage-red">✦</div>
-                            <div>
-                                <div class="lang-en">
-                                    <h4 class="font-serif font-bold text-stone-800 text-sm">Pritiya Bhojana (Grand Lunch)</h4>
-                                    <p class="text-xs text-stone-600">01:30 PM Onwards</p>
-                                </div>
-                                <div class="lang-kn hidden">
-                                    <h4 class="font-serif font-bold text-stone-800 text-sm">ಪ್ರೀತಿಯ ಭೋಜನ (ಮಹಾ ಪ್ರಸಾದ)</h4>
-                                    <p class="text-xs text-stone-600">ಮಧ್ಯಾಹ್ನ ೦೧:೩೦ ರಿಂದ ಪ್ರಾರಂಭ</p>
-                                </div>
-                            </div>
+                        <div class="lang-kn hidden">
+                            <span class="font-bold text-heritage-red">✦ ಪ್ರೀತಿಯ ಭೋಜನ (ಮಹಾ ಪ್ರಸಾದ):</span>
+                            <span class="text-stone-700">ಮಧ್ಯಾಹ್ನ ೦೧:೩೦ ರಿಂದ</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Venue details -->
-                <div class="bg-heritage-red text-heritage-goldlight rounded-2xl p-6 shadow-md border border-heritage-gold/30 text-center mb-8 reveal">
+                <!-- Venue Info -->
+                <div class="bg-heritage-red text-white rounded-xl p-4 text-xs mb-4">
                     <div class="lang-en">
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-white/80">Venue Address</span>
-                        <h4 class="font-serif font-bold text-lg text-white mt-1 mb-2">Venue Location</h4>
-                        <p class="text-sm leading-relaxed text-white/95">
+                        <h4 class="font-serif font-bold text-heritage-goldlight mb-1">Venue</h4>
+                        <p class="leading-relaxed">
                             Near Shree Adaviraya Temple,<br>
-                            Kushtagi Town, Koppal District,<br>
-                            Karnataka - 583277
+                            Kushtagi Town, Koppal District, Karnataka
                         </p>
                     </div>
                     <div class="lang-kn hidden">
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-white/80">ಕಾರ್ಯಕ್ರಮದ ಸ್ಥಳ</span>
-                        <h4 class="font-serif font-bold text-lg text-white mt-1 mb-2">ವಿಳಾಸ</h4>
-                        <p class="text-sm leading-relaxed text-white/95">
+                        <h4 class="font-serif font-bold text-heritage-goldlight mb-1">ಕಾರ್ಯಕ್ರಮದ ಸ್ಥಳ</h4>
+                        <p class="leading-relaxed">
                             ಶ್ರೀ ಅಡವಿರಾಯ ದೇವಸ್ಥಾನದ ಹತ್ತಿರ,<br>
-                            ಕುಷ್ಟಗಿ ನಗರ,<br>
-                            ಕೊಪ್ಪಳ ಜಿಲ್ಲೆ
+                            ಕುಷ್ಟಗಿ ನಗರ, ಕೊಪ್ಪಳ ಜಿಲ್ಲೆ
                         </p>
                     </div>
-                    
-                    <a href="https://maps.google.com/?q=Kushtagi+Koppal+Karnataka" target="_blank" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-heritage-gold text-heritage-red font-semibold text-xs rounded-full shadow-md hover:bg-white hover:text-heritage-red transition-all">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"/>
-                        </svg>
-                        <span class="lang-en">View on Google Maps</span>
-                        <span class="lang-kn hidden">ನಕ್ಷೆಯಲ್ಲಿ ವೀಕ್ಷಿಸಿ</span>
+                    <a href="https://maps.google.com/?q=Kushtagi+Koppal+Karnataka" target="_blank" class="inline-flex items-center gap-1.5 mt-2 px-3 py-1 bg-heritage-gold text-heritage-red font-bold text-[10px] rounded-full hover:bg-white hover:text-heritage-red transition-all">
+                        🗺️ Maps
                     </a>
                 </div>
 
-                <!-- Host Panel -->
-                <div class="border-t border-heritage-gold/30 pt-6 reveal">
-                    <div class="lang-en text-center">
-                        <p class="text-stone-500 font-sans text-[10px] tracking-widest uppercase mb-4">Cordially Invited By</p>
-                        
-                        <div class="grid grid-cols-1 gap-4 text-xs text-stone-700 font-medium">
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">Shri Kallayya Siddharamayya Sankadala</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">& Srimati Neelamma Kallayya Sankadala</p>
-                                <p class="text-[10px] text-stone-500">Jamakhandi / Bilagi / Bagalkote</p>
-                            </div>
-                            
-                            <div class="h-[1px] w-12 bg-heritage-gold/30 mx-auto"></div>
-                            
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">Shri Mahantayya Balayya Guruvina</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">& Srimati Suvarna Mahantayya Guruvina</p>
-                            </div>
-
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">Shri Siddayya Balayya Guruvina (Teacher)</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">& Srimati Shantamma Siddayya Guruvina</p>
-                            </div>
-
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">Shri Shivayya Balayya Guruvina</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">& Srimati Gangamma Shivayya Guruvina</p>
-                                <p class="text-[10px] text-stone-500">Koradakera / Kushtagi / Koppal</p>
-                            </div>
-                        </div>
-
-                        <p class="text-[10px] text-stone-500 italic mt-6">
-                            With best compliments from Guruvina Family, Relatives and Friends.
-                        </p>
+                <!-- Hosts -->
+                <div class="border-t border-heritage-gold/20 pt-3 text-[10px] text-stone-700 text-left space-y-1.5">
+                    <div class="lang-en">
+                        <p class="text-center font-bold text-[11px] text-heritage-red mb-1">Cordially Invited By:</p>
+                        <p><strong>Shri Kallayya S. Sankadala</strong> & Smt. Neelamma K. Sankadala</p>
+                        <p><strong>Shri Mahantayya B. Guruvina</strong> & Smt. Suvarna M. Guruvina</p>
+                        <p><strong>Shri Siddayya B. Guruvina</strong> (Teacher) & Smt. Shantamma S. Guruvina</p>
+                        <p><strong>Shri Shivayya B. Guruvina</strong> & Smt. Gangamma S. Guruvina</p>
                     </div>
-
-                    <div class="lang-kn hidden text-center">
-                        <p class="text-stone-500 font-sans text-[10px] tracking-widest uppercase mb-4">ಶುಭ ಕೋರುವವರು</p>
-                        
-                        <div class="grid grid-cols-1 gap-4 text-xs text-stone-700 font-medium">
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀ ಕಲ್ಲಯ್ಯ ಸಿದ್ಧರಾಮಯ್ಯ ಸಂಕದಾಳ</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀಮತಿ ನೀಲಮ್ಮ ಕಲ್ಲಯ್ಯ ಸಂಕದಾಳ</p>
-                                <p class="text-[10px] text-stone-500">ಸಾ|| ಜಮಖಂಡಿ, ತಾ|| ಬಿಳಿಗಿ, ಜಿ|| ಬಾಗಲಕೋಟೆ</p>
-                            </div>
-                            
-                            <div class="h-[1px] w-12 bg-heritage-gold/30 mx-auto"></div>
-                            
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀ ಮಹಾಂತಯ್ಯ ಬಾಲಯ್ಯ ಗುರುವಿನ</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀಮತಿ ಸುವರ್ಣಾ ಮಹಾಂತಯ್ಯ ಗುರುವಿನ</p>
-                            </div>
-
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀ ಸಿದ್ದಯ್ಯ ಬಾಲಯ್ಯ ಗುರುವಿನ (ಶಿಕ್ಷಕರು)</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀಮತಿ ಶಾಂತಮ್ಮ ಸಿದ್ದಯ್ಯ ಗುರುವಿನ</p>
-                            </div>
-
-                            <div>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀ ಶಿವಯ್ಯ ಬಾಲಯ್ಯ ಗುರುವಿನ</p>
-                                <p class="text-stone-900 font-bold font-serif text-sm">ಶ್ರೀಮತಿ ಗಂಗಮ್ಮ ಶಿವಯ್ಯ ಗುರುವಿನ</p>
-                                <p class="text-[10px] text-stone-500">ಸಾ|| ಕೊರಡಕೇರಾ, ತಾ|| ಕುಷ್ಟಗಿ, ಜಿ|| ಕೊಪ್ಪಳ</p>
-                            </div>
-                        </div>
-
-                        <p class="text-[10px] text-stone-500 italic mt-6">
-                            ಹಾಗೂ ಗುರುವಿನ ಬಂಧುಗಳು, ಇಷ್ಟಮಿತ್ರರು ಮತ್ತು ಆತ್ಮೀಯರು.
-                        </p>
+                    <div class="lang-kn hidden">
+                        <p class="text-center font-bold text-[11px] text-heritage-red mb-1">ಶುಭ ಕೋರುವವರು:</p>
+                        <p><strong>ಶ್ರೀ ಕಲ್ಲಯ್ಯ ಸಿ. ಸಂಕದಾಳ</strong> & ಶ್ರೀಮತಿ ನೀಲಮ್ಮ ಕಲ್ಲಯ್ಯ ಸಂಕದಾಳ</p>
+                        <p><strong>ಶ್ರೀ ಮಹಾಂತಯ್ಯ ಬಿ. ಗುರುವಿನ</strong> & ಶ್ರೀಮತಿ ಸುವರ್ಣಾ ಮಹಾಂತಯ್ಯ ಗುರುವಿನ</p>
+                        <p><strong>ಶ್ರೀ ಸಿದ್ದಯ್ಯ ಬಿ. ಗುರುವಿನ</strong> (ಶಿಕ್ಷಕರು) & ಶ್ರೀಮತಿ ಶಾಂತಮ್ಮ ಸಿದ್ದಯ್ಯ ಗುರುವಿನ</p>
+                        <p><strong>ಶ್ರೀ ಶಿವಯ್ಯ ಬಿ. ಗುರುವಿನ</strong> & ಶ್ರೀಮತಿ ಗಂಗಮ್ಮ ಶಿವಯ್ಯ ಗುರುವಿನ</p>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Footer Info -->
-            <div class="w-full text-center mt-12 pt-6 border-t border-heritage-gold/10">
-                <p class="text-[9px] uppercase tracking-widest text-stone-500">
-                    © 2026 Shree Amoghasiddheshwara Nilaya. All Rights Reserved.
+            <!-- Footer copyright -->
+            <div class="w-full text-center mt-8 pt-4 border-t border-heritage-gold/10 z-10">
+                <p class="text-[8px] uppercase tracking-widest text-stone-500">
+                    © 2026 Shree Amoghasiddheshwara Nilaya
                 </p>
             </div>
 
@@ -695,7 +360,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
+            const reveals = document.querySelectorAll('.reveal');
 
             const revealOnScroll = () => {
                 const triggerBottom = window.innerHeight * 0.9;
